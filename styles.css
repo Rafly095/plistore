@@ -1,0 +1,212 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    color: #333;
+    scroll-behavior: smooth;
+}
+
+h2 {
+    font-family: 'Bebas Neue', cursive;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Sticky Navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    z-index: 1000;
+}
+
+.navbar .logo img {
+    height: 40px;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    padding-right: 40px;
+}
+
+.navbar ul li {
+    margin-left: 20px;
+    white-space: nowrap;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.navbar ul li a:hover {
+    color: #ff5733;
+}
+
+.banner {
+    display: flex;
+    justify-content: center;
+    padding: 80px 20px 20px;
+}
+
+.banner img {
+    max-width: 90%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    max-width: 1000px;
+    margin: 0 auto;
+    gap: 15px;
+    padding: 20px;
+    text-align: center;
+}
+
+.product-card {
+    background: #f8f8f8;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+
+.sort-buttons button {
+    margin-left: 10px;
+    padding: 6px 12px;
+    font-size: 14px;
+    background-color: #f3f3f3;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.3s;
+}
+
+.sort-buttons button:hover {
+    background-color: #e1e1e1;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+
+.product-card img {
+    width: 100px;
+    height: 100px;
+}
+
+.product-card span {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.about-text {
+    text-align: justify;
+    max-width: 80%;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.contact-icons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.contact-icons img {
+    height: 80px;
+    width: auto;
+}
+
+.benefits-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.benefits-grid img {
+    width: 150px;
+    height: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+    .navbar ul {
+        padding-top: 10px;
+    }
+    .banner img {
+        max-width: 100%;
+    }
+    .about-text {
+        max-width: 90%;
+    }
+    .benefits-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.hamburger {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+  
+  @media (max-width: 768px) {
+    .hamburger {
+      display: block;
+      position: absolute;
+      right: 20px;
+      top: 18px;
+      z-index: 1100;
+    }
+  
+    .navbar ul {
+      display: none;
+      flex-direction: column;
+      background-color: white;
+      width: 100%;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      padding: 20px 0;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+  
+    .navbar ul.show {
+      display: flex;
+    }
+  }
+  

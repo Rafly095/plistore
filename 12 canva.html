@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Canva Premium</title>
+  <link rel="icon" type="image/x-icon" href="img/favicon/favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="detail.css">
+</head>
+<body>
+
+    <header>
+      <nav class="navbar">
+        <div class="logo">
+          <a href="index.html">
+              <img src="img/logo.png" alt="PLI STORE Logo">
+          </a>
+      </div>
+        <button class="hamburger" id="hamburgerBtn">☰</button>
+        <ul id="navLinks">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#about">Deksripsi</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#benefits">Benefits</a></li>
+        </ul>
+      </nav>      
+      </header>
+
+<section id="products">
+    <div class="container">
+      <div class="image-section">
+        <img src="img/baner/CANVABANNER.png" class="main-image" id="mainImage" alt="Netflix">
+        <div class="thumbnails">
+          <img src="img/baner/CANVABANNER.png" class="thumbnail active" onclick="changeImage(this)">
+        </div>
+      </div>
+    
+      <div class="details-section">
+        <h1>CANVA PREMIUM BERGARANSI</h1>
+        <div class="price" id="priceDisplay">Rp20.000 - Rp100.000</div>
+    
+        <div class="options">
+          <div class="option-group">
+            <strong>Tipe Akun:</strong><br>
+            <button class="btn-option active" data-type="OWNER" onclick="selectType(this)">OWNER</button>
+          </div>
+    
+          <div class="option-group">
+            <strong>Durasi:</strong><br>
+            <div id="durationContainer"></div> <!-- Tombol durasi akan dibuat via JS -->
+          </div>          
+        </div>
+    
+        <button class="buy-btn" onclick="buyNow()">Beli Sekarang</button>
+      </div>
+    </div>
+</section>
+
+<section id="about">
+    <h2>Product Details</h2>
+    <p class="about-text">
+      [ Note ]
+      • Owner akun full garansi 1x replace
+      • Owner bisa invite anggota admin, member dan designer max 500 akun
+      • ⁠Order 30 Hari FULL GARANSI
+      • Tanyakan Stok dulu yaaw!
+    </p>
+</section>
+
+<section id="contact">
+    <h2>CONTACT</h2>
+    <div class="contact-icons">
+      <a href="https://discord.gg/gXrURGCY" target="_blank">
+          <img src="img/discord.png" alt="Discord">
+      </a>
+      <a href="https://wa.me/6285769193147?text=Halo Admin, Saya membutuhkan bantuan terkait produk yang dijual. Mohon arahannya untuk menyelesaikan masalah ini.Terima kasih." target="_blank">
+          <img src="img/wa.png" alt="WhatsApp">
+      </a>
+  </div>
+  
+</section>
+
+<section id="benefits">
+    <h2>BENEFITS</h2>
+    <div class="benefits-grid">
+        <img src="img/pengiriman.png" alt="Fast Delivery">
+        <img src="img/bergaransi.png" alt="Guarantee">
+        <img src="img/payment.png" alt="All Payment">
+    </div>
+</section>
+
+<script>
+const priceMap = {
+  OWNER: {
+    durations: {
+      "1 BULAN": 20000,
+      "1 TAHUN": 35000
+    }
+  },
+};
+
+
+  let selectedType = 'OWNER';
+  let selectedDuration = '1 BULAN';
+
+  function changeImage(el) {
+    const mainImage = document.getElementById('mainImage');
+    mainImage.src = el.src;
+    document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  function selectType(button) {
+  document.querySelectorAll('[data-type]').forEach(btn => btn.classList.remove('active'));
+  button.classList.add('active');
+  selectedType = button.getAttribute('data-type');
+  
+  renderDurations(); // Tampilkan durasi sesuai tipe akun
+  updatePrice();     // Perbarui harga
+  }
+
+
+  function selectDuration(button) {
+  document.querySelectorAll('[data-duration]').forEach(btn => btn.classList.remove('active'));
+  button.classList.add('active');
+  selectedDuration = button.getAttribute('data-duration');
+
+  updatePrice(); // ⬅️ Ini penting!
+  }
+
+
+  function updatePrice() {
+  const priceElement = document.getElementById("priceDisplay");
+  const price = priceMap[selectedType].durations[selectedDuration];
+
+  if (priceElement) {
+    priceElement.innerText = `Rp${price.toLocaleString("id-ID")}`;
+  }
+  }
+
+
+  function buyNow() {
+    const message = `Halo, saya ingin membeli akun Canva tipe ${selectedType} dengan durasi ${selectedDuration}.`;
+    const url = `https://wa.me/6282289876366?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll("nav ul li a").forEach(anchor => {
+        const href = anchor.getAttribute("href");
+
+        // Hanya jalankan smooth scroll jika href diawali dengan "#"
+        if (href.startsWith("#")) {
+            anchor.addEventListener("click", function (event) {
+                event.preventDefault();
+                const targetId = href.substring(1);
+                const targetElement = document.getElementById(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: "smooth"
+                    });
+                }
+            });
+        }
+    });
+    renderDurations();  // ← Ini penting
+    updatePrice();
+});
+
+function renderDurations() {
+  const container = document.getElementById('durationContainer');
+  container.innerHTML = ''; // Bersihkan dulu
+
+  const durations = priceMap[selectedType].durations;
+
+  Object.keys(durations).forEach((duration, index) => {
+    const btn = document.createElement('button');
+    btn.textContent = duration;
+    btn.className = 'btn-option';
+    btn.setAttribute('data-duration', duration);
+    btn.onclick = () => selectDuration(btn);
+
+    // Tambahkan kelas 'active' pada durasi pertama secara default
+    if (index === 0) {
+      btn.classList.add('active');
+      selectedDuration = duration;
+    }
+
+    container.appendChild(btn);
+  });
+}
+
+
+document.getElementById("hamburgerBtn").addEventListener("click", function () {
+  document.getElementById("navLinks").classList.toggle("show");
+});
+
+
+
+</script>
+
+</body>
+</html>
