@@ -68,13 +68,26 @@ h2 {
 
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-template-columns: repeat(3, 1fr); /* Default minimal 3 */
     max-width: 1000px;
     margin: 0 auto;
     gap: 15px;
     padding: 20px;
     text-align: center;
 }
+
+@media (min-width: 768px) {
+    .product-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (min-width: 992px) {
+    .product-grid {
+        grid-template-columns: repeat(5, 1fr); /* Maksimal 5 kolom */
+    }
+}
+
 
 .product-card {
     background: #f8f8f8;
