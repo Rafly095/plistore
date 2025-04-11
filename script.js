@@ -39,3 +39,12 @@ document.getElementById("hamburgerBtn").addEventListener("click", function () {
       grid.innerHTML = "";
       originalOrder.forEach(card => grid.appendChild(card));
   }
+
+  const namespace = 'plistore.stire'; // bebas, asal unik
+  const key = 'visitor';
+
+  fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById('visitor-count').innerText = `Total Pengunjung: ${data.value}`;
+    });
