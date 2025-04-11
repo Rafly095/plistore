@@ -40,7 +40,7 @@ document.getElementById("hamburgerBtn").addEventListener("click", function () {
       originalOrder.forEach(card => grid.appendChild(card));
   }
 
-  const namespace = 'plistore.stire'; // bebas, asal unik
+  const namespace = 'plistore.site'; // bebas, asal unik
   const key = 'visitor';
 
   fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
